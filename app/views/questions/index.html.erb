@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="text-center">
+    <div class="form-control">
+      <p><b>Questionboard</p></b>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Votes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @questions.each do |question| %>
+      <tr>
+          <td> <%=question.title %></td>
+          <td> <%=question.description%></td>
+          <td> <%=question.votos %></td>
+      </tr>
+      <% end  %>
+    </tbody>
+  </table>
+</div>
