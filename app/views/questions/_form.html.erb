@@ -1,0 +1,24 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1">
+      <h1>Publish your Question my friend</h1>
+      <%= form_for @question do |i| %>
+      <div class="form-group">
+        <%= i.text_field :title, class:"form-control", placeholder: "Give your Question a cool Title" %>
+      </div>
+      <div class="form-group">
+        <%= i.text_area :description, class:"form-control", placeholder: "Describe your problem" %>
+      </div>
+
+      <div>
+        <%= i.submit "Publish Question", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= link_to "Back", questions_path%>
+</div>

@@ -6,10 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do |i|
-  i = i+1
-  Question.create(title: "Question nro #{id}",
+10.times do |i|
+  id = i + 1
+  Question.create(title: "Product nbr #{id}",
                   description: "description nro #{id}: Lorem ipsum...",
-                  voto: rand(0..200))
-
+                  votos: rand(3000..9000),)
 end

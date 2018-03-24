@@ -1,8 +1,11 @@
-<div class="container">
+
   <div class="text-center">
-    <div class="form-control">
-      <p><b>Questionboard</p></b>
-    </div>
+      <h1><i>Questionboard</i></h1>
+  </div>
+
+<div class="text-left">
+  <div class="form-control">
+  <%= link_to "Publish a new Question", new_question_path   %>
   </div>
 </div>
 
@@ -13,14 +16,18 @@
         <th>Title</th>
         <th>Description</th>
         <th>Votes</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       <% @questions.each do |question| %>
       <tr>
-          <td> <%=question.title %></td>
+          <td> <%= link_to question.title, question_path(question) %></td>
           <td> <%=question.description%></td>
           <td> <%=question.votos %></td>
+          <td><%= link_to "Edit this question",edit_question_path(question) %></td>
+          <td><%= link_to "Delete this question",question, method: :delete, data: {confirm: "Sure?"} %></td>
       </tr>
       <% end  %>
     </tbody>
