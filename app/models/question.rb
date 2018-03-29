@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :text
+#  votos       :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Question < ApplicationRecord
-  validates :title, :description, presence: true
+  validates :title, presence: true
+  validates :description, presence: true
+
 end
