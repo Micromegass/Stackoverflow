@@ -11,8 +11,9 @@ before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
     if @question.save
-    redirect_to questions_path, notice: "Your Question was published my friend, you will have solved your problem soon"
+    redirect_to questions_path, notice: "Your Question was published my friend! You will have solved your problem soon"
     else
     render :new
     end

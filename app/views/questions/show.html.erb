@@ -11,7 +11,18 @@
   <header class="question-header">
     <h1 class="heading"><%= @question.title %></h1>
     <p> <%= @question.description %></p>
+
+    <div class="actions">
+      <% if signed_in? && @question.user == current_user %>
+      <div class="button">
+        <%= link_to '<span class="glyphicon glyphicon-pencil"> </span>'.html_safe, edit_question_path %>
+        <%= link_to '<span class="glyphicon glyphicon-trash"> </span>'.html_safe,
+        @question, method: :delete, data: {confirm: "Are you sure you want to delete yor question?"} %>
+      </div>
+      <% end %>
+    </div>
   </header>
+
 
 
   <div class="container">
