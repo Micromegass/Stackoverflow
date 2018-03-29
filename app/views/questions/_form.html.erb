@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-offset-1">
-      <h1>Publish your Question my friend</h1>
+      <h1><%= form_title %></h1>
       <%= form_for @question do |i| %>
       <div class="form-group">
         <%= i.text_field :title, class:"form-control", placeholder: "Give your Question a cool Title" %>
@@ -12,7 +12,7 @@
       </div>
 
       <div>
-        <%= i.submit "Publish Question", class: "btn btn-primary btn-lg btn-block" %>
+        <%= i.submit form_title, class: "btn btn-primary btn-lg btn-block" %>
       </div>
       <% end %>
     </div>

@@ -1,8 +1,40 @@
-
+<!--
 <div>
 <h1>Question:  <%= @question.title %></h1>
 <p><%= @question.description %> </p>
  <p> the question has <%= @question.votos %> votes</p>
 </div>
 
-<%= link_to "Back", questions_path %>
+<%= link_to "Back", questions_path %> -->
+
+<div class="question-page">
+  <header class="question-header">
+    <h1 class="heading"><%= @question.title %></h1>
+    <p> <%= @question.description %></p>
+  </header>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+
+        <div>
+          <h1 class="heading">Answers</h1>
+        </div>
+
+
+        <div class="votes">
+          <h2>Votos</h2>
+        </div>
+
+        <div class="comments">
+          <h2>Comments</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="button">
+<%= link_to  "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe, questions_path %>
+</div>

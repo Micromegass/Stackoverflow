@@ -8,7 +8,7 @@
 
 10.times do |i|
   id = i + 1
-  Question.create(title: "Product nbr #{id}",
+  Question.create(title: "Question nbr #{id}",
                   description: "description nro #{id}: Lorem ipsum...",
                   votos: rand(3000..9000),)
 end

@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+before_action :authenticate_user!, only: [:edit, :update, :destroy]
+
   def index
     @questions = Question.all
   end
@@ -19,6 +21,8 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
   end
+
+
 
   def edit
     @question = Question.find(params[:id])
