@@ -16,5 +16,11 @@ class Question < ApplicationRecord
   validates :description, presence: true
 
   belongs_to :user
-  has_many :answers
+  has_many :answers, dependent: :destroy
+  has_many :votes, dependent: :destroy
+
+  def voted_by?(user)
+    votes.exists?(user: user)
+  end
+
 end

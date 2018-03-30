@@ -12,6 +12,20 @@
     <h1 class="heading"><%= @question.title %></h1>
     <p> <%= @question.description %></p>
 
+<div class="votes">
+  <% if @question.voted_by? current_user  %>
+  <%= link_to question_vote_path(@question), method: :delete, class:"question-upvote upvote-active" do %>
+  <span class="upvote-arrow"></span>
+  <span class="upvote-count"> <%= @question.votes.count %></span>
+    <%end  %>
+  <% else %>
+  <%= link_to question_vote_path(@question), method: :post, class:"question-upvote" do %>
+  <span class="upvote-arrow"></span>
+  <span class="upvote-count"> <%= @question.votes.count %></span>
+  <% end  %>
+  <% end %>
+</div>
+
     <div class="actions">
       <% if signed_in? && @question.user == current_user %>
       <div class="button">
@@ -23,6 +37,8 @@
     </div>
   </header>
 
+
+
   <h2>Answers</h2>
   <% @question.answers.each do |answer| %>
   <div class="panel panel-default">
@@ -30,10 +46,13 @@
             <%= answer.description %>
       </div>
       <div class="panel-footer">
-      answered by <%= answer.user.email %> <img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" />
+      answered by <img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" />
       </div>
     </div>
   <% end %>
+
+
+
 
 
 
@@ -55,13 +74,7 @@
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
 
-        <div class="votes">
-          <h2>Votos</h2>
-        </div>
 
-        <div class="comments">
-          <h2>Comments</h2>
-          </div>
 
 
     </div>
@@ -70,4 +83,6 @@
 
 <div class="button">
 <%= link_to  "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe, questions_path %>
+</div>
+
 </div>

@@ -42,6 +42,7 @@ before_action :authenticate_user!, only: [:edit, :update, :destroy]
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
+
     redirect_to questions_path, notice: "Gone! The post was deleted"
   end
 
