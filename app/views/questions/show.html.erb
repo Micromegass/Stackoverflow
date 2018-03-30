@@ -23,16 +23,37 @@
     </div>
   </header>
 
+  <h2>Answers</h2>
+  <% @question.answers.each do |answer| %>
+  <div class="panel panel-default">
+      <div class="panel-body">
+            <%= answer.description %>
+      </div>
+      <div class="panel-footer">
+      answered by <%= answer.user.email %> <img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" />
+      </div>
+    </div>
+  <% end %>
+
+
+
+<% if signed_in? %>
+  <%= form_for [@question, @question.answers.build] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :description, class: "form-control", rows:"10", placeholder: "Answer the question" %>
+    </div>
+
+    <div class="text-right">
+      <%= f.submit "Submit Answer", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
+
 
 
   <div class="container">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
-
-        <div>
-          <h1 class="heading">Answers</h1>
-        </div>
-
 
         <div class="votes">
           <h2>Votos</h2>
@@ -40,8 +61,9 @@
 
         <div class="comments">
           <h2>Comments</h2>
-        </div>
-      </div>
+          </div>
+
+
     </div>
   </div>
 </div>

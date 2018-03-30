@@ -30,8 +30,20 @@
     border-radius: 5px;
 
     &:hover { background:#f5f5f2 }
-    }
+  }
 
+    .question-answers {
+      float: right;
+
+      .glyphicon { font-size: 15px;
+        margin-left: 25px;}
+
+    .answers-count {
+    font-size: 18px;
+
+          }
+
+    }
 
     .question-details {
       float: left;
@@ -49,7 +61,6 @@
       font-size: 15px;
 
       }
-
 
 
  }
@@ -140,4 +151,13 @@
 
 .button {
   font-size: 30px;
+}
+
+.panel-footer {
+    img {
+      width: 20px;
+}
+
+
+
 }
