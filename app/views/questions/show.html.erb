@@ -37,36 +37,66 @@
     </div>
   </header>
 
+  <h3>Comments </h3>
+  <% @question.comments.each do |comment| %>
+  <div class="well">
+    <%= comment.body %>
+  </div>
+  <% end  %>
+
+  <% if signed_in? %>
+  <%= form_for [@question, @question.comments.build] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :body, class: "form-control", placeholder: "Comment on this" %>
+    </div>
+
+    <div class="text-right">
+      <%= f.submit "Comment", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
+
 
 
   <h2>Answers</h2>
   <% @question.answers.each do |answer| %>
   <div class="panel panel-default">
       <div class="panel-body">
-            <%= answer.description %>
+        <%= answer.description %>
       </div>
       <div class="panel-footer">
       answered by <img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" />
       </div>
+      <% answer.comments.each do |comment| %>
+      <div class="well">
+      <%= comment.body %>
+      </div>
+  <% end %>
     </div>
   <% end %>
 
-
-
-
-
+<% if @question.answers.count == 0 %>
+<p>Nobody could solve this problem up until now. We need your help. If you can answer please help out. Otherwise call a friend who knows</p>
+<% end %>
 
 <% if signed_in? %>
-  <%= form_for [@question, @question.answers.build] do |f| %>
-    <div class="form-group">
-      <%= f.text_area :description, class: "form-control", rows:"10", placeholder: "Answer the question" %>
-    </div>
-
-    <div class="text-right">
-      <%= f.submit "Submit Answer", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+<h2>Participate and put your own Answer</h2>
+  <%= form_for @answer do |f| %>
+	<%= f.hidden_field :question_id, value: @question[:id] %>
+	<%= f.hidden_field :user_id, value: current_user[:id] if !current_user.nil? %>
+	<div class="form-group">
+		<%= f.text_area :description, rows: 5, class: "form-control" %>
+	</div>
+  <div class="text-right">
+	<%= f.submit 'Submit Answer', class: 'btn btn-primary' %>
 <% end %>
+
+
+<% end  %>
+
+
+
+
 
 
 
@@ -81,8 +111,10 @@
   </div>
 </div>
 
+<div class="text-left">
 <div class="button">
 <%= link_to  "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe, questions_path %>
+</div>
 </div>
 
 </div>
