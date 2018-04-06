@@ -21,6 +21,8 @@ before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def show
     @question = Question.find(params[:id])
+    @answer = Answer.new
+    @comment = Comment.new
   end
 
 
