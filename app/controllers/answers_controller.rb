@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
 end
 
           def answer_params
-           params.require(:answer).permit(:description, :user_id, :question_id)
+           params.require(:answer).permit(:description, :user_id, :question_id, :term)
           end
 
   # def create

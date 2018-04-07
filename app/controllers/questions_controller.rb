@@ -1,8 +1,12 @@
 class QuestionsController < ApplicationController
 
   def index
+    @questions = if params[:term]
+    Question.where("title LIKE ? OR description LIKE ?" , "%#{params[:term]}%", "%#{params[:term]}%")
+  else
     @questions = Question.all
   end
+end
 
   def new
     @question = Question.new
@@ -51,7 +55,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-  params.require(:question).permit(:title, :description, :user_id)
+  params.require(:question).permit(:title, :description, :user_id, :term)
   end
 
 end
