@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
 
   def create
-  	@answer = Answer.create(answer_params)
+  	@answer = Answer.new(answer_params)
     if @answer.save
   		flash[:success] = "Thank you for your help! Your answer has been saved"
   		redirect_to root_path
@@ -13,10 +13,9 @@ class AnswersController < ApplicationController
 
 end
 
-
           def answer_params
-           params.require(:answer).permit(:description, :user_id, :question_id).merge(user: current_user)
-         end
+           params.require(:answer).permit(:description, :user_id, :question_id, :term)
+          end
 
   # def create
   #   @question = Question.find(params[:question_id])

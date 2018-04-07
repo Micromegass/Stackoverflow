@@ -24,4 +24,7 @@ class Question < ApplicationRecord
     votes.exists?(user: user)
   end
 
+
+
+
 end

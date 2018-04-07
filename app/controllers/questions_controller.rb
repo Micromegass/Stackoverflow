@@ -1,9 +1,12 @@
 class QuestionsController < ApplicationController
-before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def index
+    @questions = if params[:term]
+    Question.where("title LIKE ? OR description LIKE ?" , "%#{params[:term]}%", "%#{params[:term]}%")
+  else
     @questions = Question.all
   end
+end
 
   def new
     @question = Question.new
@@ -49,9 +52,10 @@ before_action :authenticate_user!, only: [:edit, :update, :destroy]
   end
 
 
+
   private
   def question_params
-  params.require(:question).permit(:title, :description)
+  params.require(:question).permit(:title, :description, :user_id, :term)
   end
 
 end

@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :answers, only: [:create, :new]
 
+  resources :comments, only: [:create, :new]
+
+
   resources :questions do
         resource :vote, only: [:create, :destroy]
-          resources :comments, only: [:create]
 
   end
   root 'questions#index'
