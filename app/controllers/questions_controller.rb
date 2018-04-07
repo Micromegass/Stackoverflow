@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def index
     @questions = Question.all
@@ -49,9 +48,10 @@ before_action :authenticate_user!, only: [:edit, :update, :destroy]
   end
 
 
+
   private
   def question_params
-  params.require(:question).permit(:title, :description)
+  params.require(:question).permit(:title, :description, :user_id)
   end
 
 end

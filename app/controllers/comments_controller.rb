@@ -1,22 +1,25 @@
 class CommentsController < ApplicationController
 
+  def create
+  		@comment = Comment.new(comment_params)
+  		if @comment.save
+  			flash[:success] = "Thanks for your help! Comment added successfully"
+  		else
+  			flash[:danger] = "We are very sorry, but an error occured. Comment couldn't be added"
+  		end
 
+  		if comment_params[:commentable_type] == 'Question'
+  			 redirect_to question_path(comment_params[:commentable_id])
+  		else
+  			@answer = Answer.find(comment_params[:commentable_id])
+  			redirect_to question_path(@answer.question_id)
+  		end
+  	 end
 
-def create
-  @comment = Comment.create(comments_params)
-  if @comment.save
-    flash[:success] = "Thank you for leaving a comment"
-    redirect_to root_path
-  else
-    flash[:alert] = "An error occured. We couldn't save your comment. Please try again"
-    redirect_to root_path
-  end
-
-
-private
-  def comments_params
-    params.require(:comment).permit(:body, :user_id).merge(user: current_user)
-  end
+  	private
+  		def comment_params
+  			params.require(:comment).permit(:commentable_type, :commentable_id, :body, :user_id)
+  		end
 
 
 
@@ -33,4 +36,3 @@ end
   #   def comments_params
   #     params.require(:comment).permit(:body).merge(user: current_user)
   #   end
-end
