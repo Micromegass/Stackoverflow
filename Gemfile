@@ -59,3 +59,4 @@ gem 'sass-rails', '>= 3.2'
 
 gem 'gravatar-ultimate'
 gem 'annotate'
+gem 'redcarpet'
