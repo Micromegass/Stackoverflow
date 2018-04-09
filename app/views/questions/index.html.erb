@@ -47,14 +47,18 @@
             <span class="question-title"><%= link_to question.title, question, title: question.user.email %></span>
             <span class="question-description"><%= question.description %></span> <br>
             Question posed at  <%= question.created_at.strftime (" %B %d %Y, %l:%M%P") %>
+            by   <%= question.user.email %>
+            <img src="<%= Gravatar.new("#{question.user.email}").image_url %>" class="img-circle" />
           </div>
           <div class="question-answers">
             <span class="glyphicon glyphicon-plus"></span>
             <span class="answers-count"> <%= question.answers.count %></span>
           </div>
+          <div class="text-right">
           <div class="comments">
             <span class="glyphicon glyphicon-comment"></span>
-            <span class="comment-count"> <%= question.comments.count %></span>
+            <span class="comment-count"> <%= question.comments.count  %></span>
+          </div>
           </div>
         </div>
         <% end %>

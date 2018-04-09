@@ -62,10 +62,11 @@
     <% @question.answers.each do |answer| %>
     <div class="panel panel-default">
       <div class="panel-body">
-        <%= answer.description %>
+        <%= markdown(answer.description) %>
       </div>
       <div class="panel-footer">
         answered by <img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" />
+        <%= answer.user.email %>
       </div>
     </div>
 
