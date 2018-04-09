@@ -8,6 +8,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  description :string
+#  content     :string
 #
 
 class Answer < ApplicationRecord
@@ -16,5 +17,13 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
   has_many :comments, as: :commentable, dependent: :destroy
+
+  has_many :points, as: :voteable, dependent: :destroy
+
+  def voted_by?(user)
+    points.exists?(user: user)
+  end
+
+
 
 end

@@ -17,13 +17,14 @@ class Question < ApplicationRecord
 
   belongs_to :user
   has_many :answers, dependent: :destroy
-  has_many :votes, dependent: :destroy
+  has_many :points, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :points, as: :voteable, dependent: :destroy
+
 
   def voted_by?(user)
-    votes.exists?(user: user)
+    points.exists?(user: user)
   end
-
 
 
 

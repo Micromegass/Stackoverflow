@@ -13,8 +13,21 @@ class AnswersController < ApplicationController
 
 end
 
+
+  	def voteup
+		answer=Answer.find(params[:id])
+		answer.points.create(user: current_user)
+		redirect_to question_path(answer.question), notice: "Great! You just voted for this Answer"
+  end
+
+    def votedown
+    		answer=Answer.find(params[:id])
+    		answer.points.where(user:current_user).take.try(:destroy)
+    		redirect_to question_path(answer.question), notice: "Ok! Apparently you don't like this answer anymore. Vote deleted!"
+    end
+
           def answer_params
-           params.require(:answer).permit(:description, :user_id, :question_id, :term)
+           params.require(:answer).permit(:description, :user_id, :question_id, :term, :body, :voteanswers, :answer_id)
           end
 
   # def create
@@ -32,6 +45,5 @@ end
   # private
   #   def answers_params
   #     params.require(:answer).permit(:description).merge(user: current_user)
-  #   end
 
 end
