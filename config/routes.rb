@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  
   devise_for :users
   resources :answers, only: [:create, :new] do
-    resource :voteanswer, only: [:create, :destroy]
+  resource :voteanswer, only: [:create, :destroy]
 
   end
 
@@ -25,3 +26,5 @@ Rails.application.routes.draw do
   root 'questions#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
+

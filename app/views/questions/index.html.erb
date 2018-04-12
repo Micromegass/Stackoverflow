@@ -1,40 +1,4 @@
-<!--
-<div class="text-left">
-<h1>Questionboard</h1>
-</div>
 
-<div class="container">
-<div class="text-right">
-<%= link_to "Publish a new Question", new_question_path, class: "btn btn-primary" %>
-</div>
-</div>
-
-<br>
-
-<div class="container">
-<table class="table table-striped">
-<thead class="thead-dark">
-<tr>
-<th>Title</th>
-<th>Description</th>
-<th>Votes</th>
-<th>Edit</th>
-<th>Delete</th>
-</tr>
-</thead>
-<tbody>
-<% @questions.each do |question| %>
-<tr>
-<td> <%=link_to question.title, question_path(question) %></td>
-<td> <%=question.description%></td>
-<td> <%=question.votos %></td>
-<td><%= link_to "Edit this question",edit_question_path(question) %></td>
-<td><%= link_to "Delete this question",question, method: :delete, data: {confirm: "Sure?"} %></td>
-</tr>
-<% end  %>
-</tbody>
-</table>
-</div> -->
 
 <div class="container">
   <div class="row">
@@ -55,10 +19,10 @@
             <span class="answers-count"> <%= question.answers.count %></span>
           </div>
           <div class="text-right">
-          <div class="comments">
-            <span class="glyphicon glyphicon-comment"></span>
-            <span class="comment-count"> <%= question.comments.count  %></span>
-          </div>
+            <div class="comments">
+              <span class="glyphicon glyphicon-comment"></span>
+              <span class="comment-count"> <%= question.comments.count  %></span>
+            </div>
           </div>
         </div>
         <% end %>

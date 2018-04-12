@@ -5,8 +5,10 @@ class CommentsController < ApplicationController
   		if @comment.save
   			flash[:success] = "Thanks for your help! Comment added successfully"
   		else
-  			flash[:danger] = "We are very sorry, but an error occured. Comment couldn't be added"
-  		end
+      flash[:danger] = @comment.errors.full_messages.to_sentence
+    end 
+
+
 
   		if comment_params[:commentable_type] == 'Question'
   			 redirect_to question_path(comment_params[:commentable_id])
