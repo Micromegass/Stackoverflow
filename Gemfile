@@ -61,3 +61,5 @@ gem 'gravatar-ultimate'
 gem 'annotate'
 gem 'redcarpet'
 gem 'xmlrpc'
+gem "figaro"
+

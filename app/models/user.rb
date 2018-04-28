@@ -19,8 +19,8 @@
 
 class User < ApplicationRecord
 
-  has_many :answers
-  has_many :questions
+  has_many :answers, dependent: :destroy
+  has_many :questions, dependent: :destroy
   has_many :votes
   has_many :comments
   has_many :voteanswers
@@ -32,7 +32,13 @@ class User < ApplicationRecord
 
 
 
+  after_save :send_email
 
+  private 
+
+  def send_email
+    UserMailer.welcome_mail(self).deliver
+  end 
 
 
 end
