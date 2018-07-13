@@ -4,11 +4,11 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = if params[:term]
-    Question.where("title LIKE ? OR description LIKE ?" , "%#{params[:term]}%", "%#{params[:term]}%")
-  else
+    Question.where("title iLIKE ? OR description iLIKE ?" , "%#{params[:term]}%", "%#{params[:term]}%")
+    else
     @questions = Question.all
+    end
   end
-end
 
   def new
     @question = Question.new
@@ -18,7 +18,8 @@ end
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
-    redirect_to questions_path, notice: "Your Question was published my friend! You will have solved your problem soon"
+    flash[:success] = "Your Question was published my friend! You will have solved your problem soon"
+    redirect_to questions_path 
     else
     render :new
     end
@@ -41,7 +42,8 @@ end
   def update
     @question = Question.find(params[:id])
     if @question.update(question_params)
-      redirect_to questions_path, notice: "Awesome, changes have been applied successfully"
+      flash[:success] = "Awesome, changes have been applied successfully"
+      redirect_to questions_path
     else
       render :edit
     end
@@ -57,14 +59,17 @@ end
 
   def voteup
 			question=Question.find(params[:id])
-			question.points.create(user: current_user)
-			redirect_to question_path, notice: "Great! You just voted for this Question"
+      question.points.create(user: current_user)
+      flash[:success] = "Great! You just voted for this Question"
+      redirect_to question_path
+    
   end
 
     def votedown
 			question=Question.find(params[:id])
 			question.points.where(user:current_user).take.try(:destroy)
-			redirect_to question_path, notice: "Ok! Apparently you don't like this question anymore. Vote deleted!"
+      flash[:danger] = "Ok! Apparently you don't like this question anymore. Vote deleted!"
+      redirect_to question_path
     end
 
   private

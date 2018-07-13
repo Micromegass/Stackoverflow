@@ -15,7 +15,7 @@ class Question < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :points, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
